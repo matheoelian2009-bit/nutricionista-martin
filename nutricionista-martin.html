@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martín Herrera — Nutricionista Clínico · Córdoba</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --crema: #f5f0e8;
+      --verde: #2d5a3d;
+      --verde-claro: #4a7c5f;
+      --verde-suave: #e8f0eb;
+      --dorado: #c4973a;
+      --texto: #1a1a1a;
+      --texto-suave: #5a5a5a;
+      --blanco: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--crema);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 2rem;
+      background: rgba(245,240,232,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--verde);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--texto-suave);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--verde); }
+
+    .nav-cta {
+      background: var(--verde);
+      color: var(--blanco) !important;
+      padding: 0.55rem 1.2rem;
+      border-radius: 2px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 6rem 4rem 4rem;
+      gap: 4rem;
+    }
+
+    .hero-content { max-width: 520px; }
+
+    .hero-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--verde);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--texto-suave);
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      max-width: 440px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--verde);
+      color: var(--blanco);
+      padding: 0.9rem 1.8rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover { background: var(--verde-claro); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1.5px solid var(--verde);
+      color: var(--verde);
+      padding: 0.9rem 1.8rem;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--verde);
+      color: var(--blanco);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--verde);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* FOTO PLACEHOLDER */
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .photo-container {
+      position: relative;
+      width: 380px;
+      height: 480px;
+    }
+
+    .photo-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--verde-suave);
+      border-radius: 2px;
+    }
+
+    .photo-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .photo-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: var(--verde);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: var(--blanco);
+      letter-spacing: 0.05em;
+    }
+
+    .photo-label {
+      font-size: 0.8rem;
+      color: var(--texto-suave);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .photo-accent {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 120px;
+      height: 120px;
+      border: 2px solid var(--dorado);
+      border-radius: 2px;
+      z-index: -1;
+    }
+
+    /* SOBRE MÍ */
+    .sobre-mi {
+      background: var(--verde);
+      color: var(--blanco);
+      padding: 6rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .section-tag {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .sobre-mi p {
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-size: 0.95rem;
+    }
+
+    .sobre-mi-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .sobre-stat {
+      border-left: 2px solid var(--dorado);
+      padding-left: 1.2rem;
+    }
+
+    .sobre-stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--blanco);
+      display: block;
+    }
+
+    .sobre-stat-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* SERVICIOS */
+    .servicios {
+      padding: 6rem 4rem;
+      background: var(--crema);
+    }
+
+    .servicios-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .servicios-header .section-title {
+      color: var(--texto);
+    }
+
+    .servicios-header .section-title em {
+      color: var(--verde);
+    }
+
+    .servicios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .servicio-card {
+      background: var(--blanco);
+      padding: 2.5rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .servicio-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .servicio-card.destacado {
+      background: var(--verde);
+      color: var(--blanco);
+      border-color: var(--verde);
+    }
+
+    .servicio-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--dorado);
+      color: var(--blanco);
+      font-size: 0.65rem;
+      padding: 0.3rem 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .servicio-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: rgba(0,0,0,0.06);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+
+    .destacado .servicio-num { color: rgba(255,255,255,0.1); }
+
+    .servicio-nombre {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--texto);
+    }
+
+    .destacado .servicio-nombre { color: var(--blanco); }
+
+    .servicio-desc {
+      font-size: 0.88rem;
+      color: var(--texto-suave);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .destacado .servicio-desc { color: rgba(255,255,255,0.8); }
+
+    .servicio-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+
+    .servicio-features li {
+      font-size: 0.82rem;
+      color: var(--texto-suave);
+      padding: 0.3rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .destacado .servicio-features li { color: rgba(255,255,255,0.75); }
+
+    .servicio-features li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--verde);
+      flex-shrink: 0;
+    }
+
+    .destacado .servicio-features li::before { background: var(--dorado); }
+
+    .servicio-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .destacado .servicio-footer { border-color: rgba(255,255,255,0.15); }
+
+    .servicio-precio {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--verde);
+    }
+
+    .destacado .servicio-precio { color: var(--blanco); }
+
+    .servicio-duracion {
+      font-size: 0.75rem;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .destacado .servicio-duracion { color: rgba(255,255,255,0.6); }
+
+    .servicio-cta {
+      font-size: 0.8rem;
+      color: var(--verde);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    .destacado .servicio-cta { color: var(--dorado); }
+
+    /* TESTIMONIOS */
+    .testimonios {
+      background: #f0ebe0;
+      padding: 6rem 4rem;
+    }
+
+    .testimonios-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .testimonios-header .section-title { color: var(--texto); }
+    .testimonios-header .section-title em { color: var(--verde); }
+
+    .testimonios-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .testimonio-card {
+      background: var(--blanco);
+      padding: 2.5rem;
+      position: relative;
+    }
+
+    .testimonio-comilla {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      color: var(--verde);
+      opacity: 0.15;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    .testimonio-texto {
+      font-size: 0.92rem;
+      color: var(--texto-suave);
+      line-height: 1.8;
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    .testimonio-autor {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .autor-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--verde-suave);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--verde);
+      flex-shrink: 0;
+    }
+
+    .autor-nombre {
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: var(--texto);
+    }
+
+    .autor-detalle {
+      font-size: 0.78rem;
+      color: var(--texto-suave);
+    }
+
+    .estrellas {
+      color: var(--dorado);
+      font-size: 0.85rem;
+      margin-top: 0.2rem;
+    }
+
+    /* CONTACTO */
+    .contacto {
+      background: var(--verde);
+      padding: 6rem 4rem;
+      text-align: center;
+    }
+
+    .contacto .section-tag { color: var(--dorado); }
+
+    .contacto .section-title {
+      color: var(--blanco);
+      margin-bottom: 1.2rem;
+    }
+
+    .contacto .section-title em { color: rgba(255,255,255,0.6); }
+
+    .contacto-desc {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--blanco);
+      color: var(--verde);
+      padding: 1rem 2.2rem;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: all 0.2s;
+      margin-bottom: 3rem;
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--dorado);
+      color: var(--blanco);
+    }
+
+    .contacto-info {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .contacto-item {
+      text-align: center;
+    }
+
+    .contacto-item-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 0.3rem;
+    }
+
+    .contacto-item-value {
+      font-size: 0.9rem;
+      color: var(--blanco);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a2e20;
+      padding: 1.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 5rem 1.5rem 3rem;
+        gap: 2.5rem;
+        text-align: center;
+      }
+
+      .hero-content { max-width: 100%; }
+      .hero-subtitle { max-width: 100%; }
+      .hero-buttons { justify-content: center; }
+      .hero-stats { justify-content: center; }
+
+      .hero-image { order: -1; }
+      .photo-container { width: 260px; height: 320px; }
+
+      .sobre-mi {
+        grid-template-columns: 1fr;
+        padding: 4rem 1.5rem;
+        gap: 3rem;
+      }
+
+      .sobre-mi-stats { grid-template-columns: 1fr 1fr; }
+
+      .servicios { padding: 4rem 1.5rem; }
+      .servicios-grid { grid-template-columns: 1fr; }
+
+      .testimonios { padding: 4rem 1.5rem; }
+      .testimonios-grid { grid-template-columns: 1fr; }
+
+      .contacto { padding: 4rem 1.5rem; }
+      .contacto-info { gap: 1.5rem; }
+
+      footer {
+        padding: 1.2rem 1.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Martín Herrera</div>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+      <li><a href="#contacto" class="nav-cta">Contactar</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-tag">Nutricionista Clínico · Córdoba, Argentina</p>
+      <h1 class="hero-title">
+        Martín<br>
+        <em>Herrera</em>
+      </h1>
+      <p class="hero-subtitle">
+        Planes nutricionales diseñados desde tu historia, no desde una plantilla. 
+        Trabajo con vos para construir hábitos reales que se sostienen en el tiempo.
+      </p>
+      <div class="hero-buttons">
+        <a href="#contacto" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.213a.75.75 0 00.93.93l5.368-1.471A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.95 0-3.784-.528-5.36-1.449l-.383-.228-3.985 1.091 1.091-3.985-.228-.383A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+          Pedir turno por WhatsApp
+        </a>
+        <a href="#servicios" class="btn-secondary">Ver servicios</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <span class="stat-number">+500</span>
+          <span class="stat-label">Pacientes</span>
+        </div>
+        <div>
+          <span class="stat-number">10+</span>
+          <span class="stat-label">Años de experiencia</span>
+        </div>
+        <div>
+          <span class="stat-number">97%</span>
+          <span class="stat-label">Satisfacción</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="photo-container">
+        <div class="photo-bg"></div>
+        <div class="photo-placeholder">
+          <div class="photo-circle">MH</div>
+          <span class="photo-label">Tu foto acá</span>
+        </div>
+        <div class="photo-accent"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section class="sobre-mi" id="sobre-mi">
+    <div>
+      <p class="section-tag">Sobre mí</p>
+      <h2 class="section-title">Nutrición que<br><em>cambia vidas</em></h2>
+      <p>Soy Licenciado en Nutrición egresado de la Universidad Nacional de Córdoba, con más de 10 años acompañando a personas que quieren transformar su relación con la comida de forma real y duradera.</p>
+      <p>Mi enfoque integra evidencia científica con escucha genuina. No existe un plan único para todos: cada consulta parte de entender tu historia, tu contexto y tus objetivos reales.</p>
+      <p>Atiendo en mi consultorio en Nueva Córdoba y de forma online para todo el país.</p>
+    </div>
+    <div class="sobre-mi-stats">
+      <div class="sobre-stat">
+        <span class="sobre-stat-number">+500</span>
+        <span class="sobre-stat-label">Pacientes acompañados</span>
+      </div>
+      <div class="sobre-stat">
+        <span class="sobre-stat-number">10+</span>
+        <span class="sobre-stat-label">Años de experiencia</span>
+      </div>
+      <div class="sobre-stat">
+        <span class="sobre-stat-number">97%</span>
+        <span class="sobre-stat-label">Satisfacción en consultas</span>
+      </div>
+      <div class="sobre-stat">
+        <span class="sobre-stat-number">Online</span>
+        <span class="sobre-stat-label">Para todo el país</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="servicios" id="servicios">
+    <div class="servicios-header">
+      <p class="section-tag">Servicios</p>
+      <h2 class="section-title">¿Cómo puedo<br><em>ayudarte?</em></h2>
+    </div>
+    <div class="servicios-grid">
+      <div class="servicio-card">
+        <div class="servicio-num">01</div>
+        <h3 class="servicio-nombre">Consulta Inicial</h3>
+        <p class="servicio-desc">Primera consulta completa con evaluación nutricional, análisis de hábitos y diseño de tu plan personalizado.</p>
+        <ul class="servicio-features">
+          <li>Evaluación antropométrica completa</li>
+          <li>Plan alimentario inicial</li>
+          <li>Guías y recetas de apoyo</li>
+        </ul>
+        <div class="servicio-footer">
+          <div>
+            <div class="servicio-precio">$12.000</div>
+            <div class="servicio-duracion">75 min</div>
+          </div>
+          <a href="#contacto" class="servicio-cta">Consultar →</a>
+        </div>
+      </div>
+
+      <div class="servicio-card destacado">
+        <div class="servicio-badge">Más elegido</div>
+        <div class="servicio-num">02</div>
+        <h3 class="servicio-nombre">Plan Mensual</h3>
+        <p class="servicio-desc">Seguimiento mensual con ajustes continuos, control de evolución y soporte directo por WhatsApp.</p>
+        <ul class="servicio-features">
+          <li>4 consultas mensuales</li>
+          <li>Plan actualizado mensualmente</li>
+          <li>Soporte por WhatsApp</li>
+          <li>Material educativo incluido</li>
+        </ul>
+        <div class="servicio-footer">
+          <div>
+            <div class="servicio-precio">$22.000</div>
+            <div class="servicio-duracion">4 sesiones</div>
+          </div>
+          <a href="#contacto" class="servicio-cta">Consultar →</a>
+        </div>
+      </div>
+
+      <div class="servicio-card">
+        <div class="servicio-num">03</div>
+        <h3 class="servicio-nombre">Consulta de Seguimiento</h3>
+        <p class="servicio-desc">Revisión del avance, ajuste del plan y resolución de dudas para mantener el camino hacia tus metas.</p>
+        <ul class="servicio-features">
+          <li>Control de evolución</li>
+          <li>Ajuste del plan</li>
+          <li>Nuevas estrategias</li>
+        </ul>
+        <div class="servicio-footer">
+          <div>
+            <div class="servicio-precio">$7.500</div>
+            <div class="servicio-duracion">45 min</div>
+          </div>
+          <a href="#contacto" class="servicio-cta">Consultar →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="testimonios" id="testimonios">
+    <div class="testimonios-header">
+      <p class="section-tag">Testimonios</p>
+      <h2 class="section-title">Lo que dicen<br><em>mis pacientes</em></h2>
+    </div>
+    <div class="testimonios-grid">
+      <div class="testimonio-card">
+        <div class="testimonio-comilla">"</div>
+        <p class="testimonio-texto">Llevaba años probando dietas que no me funcionaban. Con Martín entendí por qué: nunca habían tenido en cuenta cómo vivo yo. El cambio fue real y lo mantuve. Lo recomiendo sin dudarlo.</p>
+        <div class="testimonio-autor">
+          <div class="autor-avatar">LR</div>
+          <div>
+            <div class="autor-nombre">Lucas R.</div>
+            <div class="autor-detalle">Córdoba Capital</div>
+            <div class="estrellas">★★★★★</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonio-card">
+        <div class="testimonio-comilla">"</div>
+        <p class="testimonio-texto">Empecé con el plan mensual sin muchas expectativas. A los dos meses noté resultados que no había logrado en años. La atención por WhatsApp hace toda la diferencia cuando tenés dudas en el momento.</p>
+        <div class="testimonio-autor">
+          <div class="autor-avatar">SA</div>
+          <div>
+            <div class="autor-nombre">Sofía A.</div>
+            <div class="autor-detalle">Buenos Aires · Sesión online</div>
+            <div class="estrellas">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <p class="section-tag">Contacto</p>
+    <h2 class="section-title">¿Empezamos<br><em>tu camino?</em></h2>
+    <p class="contacto-desc">Escribime por WhatsApp y coordinamos tu primera consulta. Atiendo en Nueva Córdoba y de forma online para todo el país.</p>
+    <a href="https://wa.me/5493510000000" class="btn-whatsapp" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.528 5.845L.057 23.213a.75.75 0 00.93.93l5.368-1.471A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.95 0-3.784-.528-5.36-1.449l-.383-.228-3.985 1.091 1.091-3.985-.228-.383A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Escribime por WhatsApp
+    </a>
+    <div class="contacto-info">
+      <div class="contacto-item">
+        <div class="contacto-item-label">Consultorio</div>
+        <div class="contacto-item-value">Nueva Córdoba, Cba.</div>
+      </div>
+      <div class="contacto-item">
+        <div class="contacto-item-label">Modalidad</div>
+        <div class="contacto-item-value">Presencial y online</div>
+      </div>
+      <div class="contacto-item">
+        <div class="contacto-item-label">Horarios</div>
+        <div class="contacto-item-value">Lun–Vie, 9 a 19 hs</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Martín Herrera — Nutricionista Clínico · Lic. M.P. 5678 · Córdoba, Argentina</p>
+    <p>© 2026 — Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
